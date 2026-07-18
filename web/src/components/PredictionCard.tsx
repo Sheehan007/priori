@@ -29,6 +29,7 @@ interface Props {
   receipt: Receipt | null;
   onReveal: (index: number) => Promise<void>;
   onVerify: (index: number) => Promise<VerifyOutcome>;
+  onProveLock: (index: number) => Promise<string>;
 }
 
 const pct = (bps: number) => `${bps >= 0 ? "+" : ""}${(bps / 100).toFixed(2)}%`;
@@ -42,9 +43,10 @@ function countdown(until: number): string {
   return `${Math.floor(s / 86400)}d left`;
 }
 
-export function PredictionCard({ index, p, receipt, onReveal, onVerify }: Props) {
+export function PredictionCard({ index, p, receipt, onReveal, onVerify, onProveLock }: Props) {
   const [busy, setBusy] = useState(false);
   const [verify, setVerify] = useState<VerifyOutcome | null>(null);
+  const [lockProof, setLockProof] = useState<string | null>(null);
   const [err, setErr] = useState<string | null>(null);
 
   const now = Math.floor(Date.now() / 1000);
@@ -86,6 +88,18 @@ export function PredictionCard({ index, p, receipt, onReveal, onVerify }: Props)
     setErr(null);
     try {
       setVerify(await onVerify(index));
+    } catch (e: any) {
+      setErr(e?.shortMessage || e?.message || String(e));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function doProveLock() {
+    setBusy(true);
+    setErr(null);
+    try {
+      setLockProof(await onProveLock(index));
     } catch (e: any) {
       setErr(e?.shortMessage || e?.message || String(e));
     } finally {
@@ -162,6 +176,20 @@ export function PredictionCard({ index, p, receipt, onReveal, onVerify }: Props)
         </div>
       )}
 
+      {lockProof && (
+        <div className={`verify ${lockProof.includes("TooEarlyToReveal") ? "ok" : "bad"}`}>
+          {lockProof.includes("TooEarlyToReveal") ? (
+            <>
+              ✓ The contract refused the reveal — reverted with{" "}
+              <b className="mono">TooEarlyToReveal</b>. The lock is enforced onchain, not by this
+              interface.
+            </>
+          ) : (
+            <>Contract response: <span className="mono">{lockProof}</span></>
+          )}
+        </div>
+      )}
+
       {err && <div className="verify bad">{err}</div>}
 
       <div className="actions">
@@ -176,7 +204,12 @@ export function PredictionCard({ index, p, receipt, onReveal, onVerify }: Props)
           </button>
         )}
         {status === "pending" && (
-          <span className="hint">Locked by the contract until the window closes.</span>
+          <>
+            <button className="sm" disabled={busy || !receipt} onClick={doProveLock}>
+              {busy ? "Asking the contract…" : "Try revealing early"}
+            </button>
+            <span className="hint">Don’t trust the countdown — make the contract prove it.</span>
+          </>
         )}
       </div>
     </div>

@@ -182,6 +182,37 @@ export default function App() {
     await refresh(account);
   }
 
+  /**
+   * Ask the live contract to reveal a still-pending prediction. This is a plain
+   * eth_call simulation — no gas, no signature — so anyone can confirm the lock
+   * is enforced by the chain rather than taken on this UI's word.
+   */
+  async function handleProveLock(index: number): Promise<string> {
+    if (!account) throw new Error("Connect a wallet first.");
+    const receipt = loadReceipt(account, index);
+    if (!receipt) throw new Error("Receipt missing from this browser.");
+    try {
+      await publicClient.simulateContract({
+        address: CONTRACT_ADDRESS,
+        abi: PRIORI_ABI as any,
+        functionName: "reveal",
+        args: [BigInt(index), receipt.plaintext, receipt.salt, true, 0],
+        account,
+      });
+      return "Simulation passed — the window has already opened, so the lock no longer applies.";
+    } catch (e: any) {
+      const message = String(e?.message ?? e);
+      const known = [
+        "TooEarlyToReveal",
+        "HashMismatch",
+        "AlreadyRevealed",
+        "NoSuchPrediction",
+        "EvaluationMustBeFuture",
+      ];
+      return known.find((k) => message.includes(k)) ?? e?.shortMessage ?? message.slice(0, 160);
+    }
+  }
+
   /** Recompute a revealed prediction from public data and compare to its onchain claim. */
   async function handleVerify(index: number): Promise<VerifyOutcome> {
     const p = predictions[index];
@@ -343,6 +374,7 @@ export default function App() {
                   receipt={account ? loadReceipt(account, i) : null}
                   onReveal={handleReveal}
                   onVerify={handleVerify}
+                  onProveLock={handleProveLock}
                 />
               ))
           )}
