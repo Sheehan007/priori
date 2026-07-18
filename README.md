@@ -80,8 +80,9 @@ Nothing is stubbed. A reveal number is computed from real prices at the moment y
 
 | | |
 |---|---|
-| Address | `<filled at deploy>` |
-| Explorer | `<filled at deploy>` |
+| Address | [`0xfa5492E58095E9A25f6cc5d8E85F8f7bdE1a9ECA`](https://testnet.monadvision.com/address/0xfa5492E58095E9A25f6cc5d8E85F8f7bdE1a9ECA) |
+| Deploy tx | [`0x181be4624b37ab950cd1c147d03bdf5b6996c80df81841f96810603f250ebdec`](https://testnet.monadvision.com/tx/0x181be4624b37ab950cd1c147d03bdf5b6996c80df81841f96810603f250ebdec) |
+| Network | Monad Testnet (chain ID 10143) |
 
 ```solidity
 seal(bytes32 commitHash, uint64 evaluateAfter, string label) returns (uint256 id)

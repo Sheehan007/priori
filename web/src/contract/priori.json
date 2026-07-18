@@ -1,8 +1,8 @@
 {
-  "address": "0x0000000000000000000000000000000000000000",
+  "address": "0xfa5492E58095E9A25f6cc5d8E85F8f7bdE1a9ECA",
   "chainId": 10143,
-  "deployTx": null,
-  "deployedAt": null,
+  "deployTx": "0x181be4624b37ab950cd1c147d03bdf5b6996c80df81841f96810603f250ebdec",
+  "deployedAt": "2026-07-18T14:02:08.740Z",
   "abi": [
     {
       "inputs": [],
