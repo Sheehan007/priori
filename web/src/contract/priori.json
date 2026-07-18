@@ -1,0 +1,372 @@
+{
+  "address": "0x0000000000000000000000000000000000000000",
+  "chainId": 10143,
+  "deployTx": null,
+  "deployedAt": null,
+  "abi": [
+    {
+      "inputs": [],
+      "name": "AlreadyRevealed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EmptyLabel",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "EvaluationMustBeFuture",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "HashMismatch",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NoSuchPrediction",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "TooEarlyToReveal",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "plaintext",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "hit",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "int32",
+          "name": "metricBps",
+          "type": "int32"
+        }
+      ],
+      "name": "Revealed",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "commitHash",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "evaluateAfter",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "name": "Sealed",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "authors",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        }
+      ],
+      "name": "count",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "name": "get",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "commitHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "sealedAt",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "evaluateAfter",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "revealedAt",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bool",
+              "name": "hit",
+              "type": "bool"
+            },
+            {
+              "internalType": "int32",
+              "name": "metricBps",
+              "type": "int32"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "plaintext",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct Priori.Prediction",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        }
+      ],
+      "name": "listAll",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "bytes32",
+              "name": "commitHash",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "sealedAt",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "evaluateAfter",
+              "type": "uint64"
+            },
+            {
+              "internalType": "uint64",
+              "name": "revealedAt",
+              "type": "uint64"
+            },
+            {
+              "internalType": "bool",
+              "name": "hit",
+              "type": "bool"
+            },
+            {
+              "internalType": "int32",
+              "name": "metricBps",
+              "type": "int32"
+            },
+            {
+              "internalType": "string",
+              "name": "label",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "plaintext",
+              "type": "string"
+            }
+          ],
+          "internalType": "struct Priori.Prediction[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "plaintext",
+          "type": "string"
+        },
+        {
+          "internalType": "bytes32",
+          "name": "salt",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bool",
+          "name": "hit",
+          "type": "bool"
+        },
+        {
+          "internalType": "int32",
+          "name": "metricBps",
+          "type": "int32"
+        }
+      ],
+      "name": "reveal",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "commitHash",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "evaluateAfter",
+          "type": "uint64"
+        },
+        {
+          "internalType": "string",
+          "name": "label",
+          "type": "string"
+        }
+      ],
+      "name": "seal",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "id",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "author",
+          "type": "address"
+        }
+      ],
+      "name": "stats",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "total",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "revealed",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "hits",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "abandoned",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pending",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ]
+}
