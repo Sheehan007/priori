@@ -1,0 +1,19 @@
+# secrets — never commit a private key
+.env
+.env.*
+!.env.example
+
+# node
+node_modules/
+
+# hardhat
+artifacts/
+cache/
+typechain-types/
+
+# frontend
+web/dist/
+web/node_modules/
+
+# os
+.DS_Store
