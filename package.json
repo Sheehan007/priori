@@ -7,7 +7,8 @@
     "test": "hardhat test",
     "compile": "hardhat compile",
     "deploy": "hardhat run scripts/deploy.js --network monadTestnet",
-    "web": "npm --prefix web run dev"
+    "web": "npm --prefix web run dev",
+    "fund": "node scripts/fund.js"
   },
   "keywords": [],
   "author": "",
