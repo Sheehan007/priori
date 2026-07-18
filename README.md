@@ -5,6 +5,9 @@ hindsight bias made structurally impossible.
 
 > Built for the BuildAnything hackathon (Spark) on **Monad**.
 
+**▶ Live app: https://sheehan007.github.io/priori/**
+**Contract (Monad Testnet):** [`0xfa5492E58095E9A25f6cc5d8E85F8f7bdE1a9ECA`](https://testnet.monadvision.com/address/0xfa5492E58095E9A25f6cc5d8E85F8f7bdE1a9ECA)
+
 ---
 
 ## The problem (a real one I have)
